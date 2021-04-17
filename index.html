@@ -28,7 +28,7 @@
 
   <!-- Scripts
   -------------------------------------------------- -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -58,13 +58,29 @@
   </div>
 
   <script>
+      // Document Ready Event Function - loads immediatley 
       $(() => {
-          $('#send').click(()=>{addMessages({ name: 'Scott', message: "Hi!" })})
+
+        // Add a click function - addMessages()
+        $('#send').click(()=>{addMessages({ name: 'Scott', message: "Hi!" })})
+
+        // show messages on page load
+        getMessage()
       })
 
+      // addMessages() - appends the message.name and message.message to the page
       const addMessages = (message) => {
         $('#messages').append(`<br><span><strong>${message.name}</strong></span><br><span>${message.message}</span><br>`)
       }
+
+      const getMessage = ()=>{
+          $.get('http://localhost:3000/messages', (data)=>{
+            data.forEach(element => {
+                addMessages(element)
+            });
+          })
+      }
+
   </script>
 
 <!-- End Document
