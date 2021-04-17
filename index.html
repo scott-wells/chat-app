@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Chat App - Say 'hi' to your friends.</title>
+  <meta name="description" content="A simple chat application.">
+  <meta name="author" content="Scott">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Scripts
+  -------------------------------------------------- -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="two columns" style="margin-top: 25%">
+        <h4>Send a message.</h4>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+        <div class="four columns">
+            <input type="text" id="name" placeholder="Name">
+            <br>
+            <textarea placeholder="What do you want to say?" style="width: 60%;"></textarea>
+            <br>
+            <button id="send">Send</button>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div id="messages"></div>
+    </div>
+  </div>
+
+  <script>
+      $(() => {
+          $('#send').click(()=>{addMessages({ name: 'Scott', message: "Hi!" })})
+      })
+
+      const addMessages = (message) => {
+        $('#messages').append(`<br><span><strong>${message.name}</strong></span><br><span>${message.message}</span><br>`)
+      }
+  </script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
