@@ -46,7 +46,7 @@
         <div class="four columns">
             <input type="text" id="name" placeholder="Name">
             <br>
-            <textarea placeholder="What do you want to say?" style="width: 60%;"></textarea>
+            <textarea id="message" placeholder="What do you want to say?" style="width: 60%;"></textarea>
             <br>
             <button id="send">Send</button>
             <br>
@@ -58,27 +58,40 @@
   </div>
 
   <script>
-      // Document Ready Event Function - loads immediatley 
+      // Document Ready Event Function - loads immediately
       $(() => {
 
-        // Add a click function - addMessages()
-        $('#send').click(()=>{addMessages({ name: 'Scott', message: "Hi!" })})
+        // Add a click function - addMessages() -start with a temp message object for testing
+        // When you're ready to make the click button use the inputs... 
+        // set up the message object by selecting the ids of the form input - use the value of these inputs
+        // Finally, post the message
+        $('#send').click(()=>{
+          let message = { name: $('#name').val(), message: $('#message').val() }
+          postMessage(message)
+        })
 
         // show messages on page load
         getMessage()
       })
 
-      // addMessages() - appends the message.name and message.message to the page
+      // addMessages() - appends the message.name and message.message to the webpage
       const addMessages = (message) => {
         $('#messages').append(`<br><span><strong>${message.name}</strong></span><br><span>${message.message}</span><br>`)
       }
 
+      // gets the messages from the /message endpoint
       const getMessage = ()=>{
           $.get('http://localhost:3000/messages', (data)=>{
             data.forEach(element => {
                 addMessages(element)
             });
           })
+      }
+
+      // posts a new user message from the /message endpoint
+      // takes in a message, passes it to the jquery function, and the data is used in the callback
+      const postMessage = (message)=>{
+          $.post('http://localhost:3000/messages', message)
       }
 
   </script>
