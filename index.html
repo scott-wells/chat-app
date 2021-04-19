@@ -29,6 +29,7 @@
   <!-- Scripts
   -------------------------------------------------- -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
 </head>
 <body>
@@ -58,6 +59,9 @@
   </div>
 
   <script>
+      // make a variable for socket.io to run
+      const socket = io()
+
       // Document Ready Event Function - loads immediately
       $(() => {
 
@@ -75,7 +79,7 @@
       })
 
       // addMessages() - appends the message.name and message.message to the webpage
-      const addMessages = (message) => {
+      const addMessage = (message) => {
         $('#messages').append(`<br><span><strong>${message.name}</strong></span><br><span>${message.message}</span><br>`)
       }
 
@@ -83,7 +87,7 @@
       const getMessage = ()=>{
           $.get('http://localhost:3000/messages', (data)=>{
             data.forEach(element => {
-                addMessages(element)
+                addMessage(element)
             });
           })
       }
@@ -93,6 +97,8 @@
       const postMessage = (message)=>{
           $.post('http://localhost:3000/messages', message)
       }
+
+      socket.on('message', addMessage)
 
   </script>
 
